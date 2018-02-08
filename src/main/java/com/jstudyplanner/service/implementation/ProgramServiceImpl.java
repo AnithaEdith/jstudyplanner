@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,11 @@ public class ProgramServiceImpl implements ProgramService {
 	
 	@Autowired ProgramDAO programDAO;
 	@Autowired CourseDAO courseDAO;
-	
+
+/*	@Autowired
+	private SessionFactory sessionFactory;*/
+
+
 	public List<Program> getAllPrograms() {
 		return programDAO.getAllPrograms();
 	}

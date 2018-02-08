@@ -2,6 +2,7 @@ package com.jstudyplanner.service.implementation;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,14 @@ import com.jstudyplanner.service.EnrollmentService;
 public class EnrollmentServiceImpl implements EnrollmentService {
 	
 	@Autowired EnrollmentDAO enrollmentDAO;
-	
-	
+
+/*
+	@Autowired
+	private SessionFactory sessionFactory;
+*/
+
+
+
 	/**
 	 * Attempts to save enrollment. Given enrollment can be new (without id) then it should be created in the database.
 	 * OR the enrollment can be existing (with defined id) then it should be saved. If enrollment doesn't have status defined 

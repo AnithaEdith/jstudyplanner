@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.jstudyplanner.domain">
+	
+	<!-- all classes have generator class = native, so the database should generate ids -->
+	
+	<class name="Campus" table="campus">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="code" column="code" type="string"/>
+		<property name="title" column="title" type="string"/>
+		<property name="enabled" column="enabled" type="byte"/>
+		<property name="address" column="address" type="string"/>
+		<property name="phone" column="phone" type="string"/>
+		<property name="description" column="description" type="string"/>
+	</class>
+	
+	<class name="Course" table="course">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="code" column="code" type="string"/>
+		<property name="title" column="title" type="string"/>
+		<property name="enabled" column="enabled" type="byte"/>
+		<property name="description" column="description" type="string"/>
+		<set name="prerequisites" table="prerequisite" lazy="false">
+	    	<key column="course"/>
+	    	<many-to-many column="prerequisite" class="Course"/>
+	    </set>
+	</class>
+	
+	<class name="Major" table="major">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="code" column="code" type="string"/>
+		<property name="title" column="title" type="string"/>
+		<property name="enabled" column="enabled" type="byte"/>
+		<property name="description" column="description" type="string"/>
+		<many-to-one name="program" column="program_fk" class="Program" not-null="true" lazy="false" />
+		<set name="compulsoryCourses" table="major_compulsory_courses" lazy="false">
+	    	<key column="major_fk"/>
+	    	<many-to-many column="course_fk" class="Course"/>
+	    </set>
+	</class>
+	
+	<class name="Program" table="program">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="code" column="code" type="string"/>
+		<property name="title" column="title" type="string"/>
+		<property name="enabled" column="enabled" type="byte"/>
+		<property name="description" column="description" type="string"/>
+		<property name="career" column="career" type="string"/>
+		<property name="numberOfCourses" column="number_of_courses" type="integer"/>
+		<set name="coreCourses" table="program_core_courses" lazy="false">
+	    	<key column="program_fk"/>
+	    	<many-to-many column="course_fk" class="Course"/>
+	    </set>
+	    <set name="electiveCourses" table="program_elective_courses" lazy="false">
+	    	<key column="program_fk"/>
+	    	<many-to-many column="course_fk" class="Course"/>
+	    </set>
+	</class>
+	
+	<class name="Term" table="term">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="year" column="year" type="integer"/>
+		<property name="number" column="number" type="integer"/>
+		<property name="startDate" column="start_date" type="date"/>
+		<property name="finishDate" column="finish_date" type="date"/>
+		<property name="enabled" column="enabled" type="byte"/>
+	</class>
+	
+	<class name="CourseAvailability" table="course_availability">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<many-to-one name="term" column="term_fk" class="Term" not-null="true" lazy="false" />
+		<many-to-one name="course" column="course_fk" class="Course" not-null="true" lazy="false" />
+		<many-to-one name="campus" column="campus_fk" class="Campus" not-null="true" lazy="false" />
+		<property name="enabled" column="enabled" type="byte"/>
+	</class>
+	
+	<class name="Enrollment" table="enrollment">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<many-to-one name="courseAvailability" column="ca_fk" class="CourseAvailability" not-null="true" lazy="false" />
+		<many-to-one name="student" column="user_fk" class="Student" not-null="true" lazy="false" />
+		<property name="status" column="status" type="string"/>
+	</class>
+	
+	
+	<class name="User" table="user">
+		<id name="id" column="id">
+			<generator class="native"/>
+		</id>
+		<discriminator column="utype" type="string"></discriminator>
+		<property name="utype" column="utype" type="string" insert="false" update="false" />
+		<property name="email" column="email" type="string"/>
+		<property name="username" column="username" type="string"/>
+		<property name="password" column="password" type="string"/>
+		<property name="enabled" column="enabled" type="byte"/>
+		<property name="firstName" column="first_name" type="string"/>
+		<property name="lastName" column="last_name" type="string"/>
+		<property name="phone" column="phone" type="string"/>
+		<subclass name="Admin" discriminator-value="admin"></subclass>
+		<subclass name="Staff" discriminator-value="staff">
+			<set name="managedCampuses" table="campus_management" lazy="false">
+		    	<key column="user_fk"/>
+		    	<many-to-many column="campus_fk" class="Campus"/>
+	    	</set>
+		</subclass>
+		<subclass name="Student" discriminator-value="student">
+			<property name="type" column="student_type" type="string"/>
+			<many-to-one name="major" column="major_id" class="Major" not-null="false" lazy="false" />
+			<many-to-one name="campus" column="campus_id" class="Campus" not-null="false" lazy="false" />
+		</subclass>
+	</class>
+	
+	
+</hibernate-mapping>

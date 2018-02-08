@@ -2,6 +2,7 @@ package com.jstudyplanner.service.implementation;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,13 @@ import com.jstudyplanner.service.TermService;
 public class TermServiceImpl implements TermService {
 	
 	@Autowired TermDAO termDAO;
-	
+
+/*
+	@Autowired
+	private SessionFactory sessionFactory;
+
+*/
+
 	public List<Term> getAllTerms() {
 		return termDAO.getAllTerms();
 	}

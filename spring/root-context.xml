@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -11,8 +12,9 @@
 	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 	">
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<import resource="hibernate-context.xml" /> <!-- Hibernate data source and DAO objects configuration -->
+	&lt;!&ndash; Root Context: defines shared resources visible to all other web components &ndash;&gt;
+	<import resource="hibernate-context.xml" /> &lt;!&ndash; Hibernate data source and DAO objects configuration &ndash;&gt;
 	
-	<import resource="spring-security.xml" /> <!-- Spring security configuration -->
+	<import resource="spring-security.xml" /> &lt;!&ndash; Spring security configuration &ndash;&gt;
 </beans>
+-->

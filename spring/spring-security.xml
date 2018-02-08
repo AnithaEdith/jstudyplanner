@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -22,14 +23,14 @@
 		<intercept-url pattern="/**" access="permitAll" />
 	</http>
 
-	<!-- Class that redirects successful login according to user role/type -->
+	&lt;!&ndash; Class that redirects successful login according to user role/type &ndash;&gt;
 	<beans:bean id="simpleAuthenticationSuccessHandler"
 		class="com.jstudyplanner.web.SimpleUrlAuthenticationSuccessHandler" />
 	
-	<!-- Enable @Secured annotations to apply method-level security -->
+	&lt;!&ndash; Enable @Secured annotations to apply method-level security &ndash;&gt;
 	<global-method-security secured-annotations="enabled" />
 
-	<!-- Authentication against database -->
+	&lt;!&ndash; Authentication against database &ndash;&gt;
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
@@ -45,8 +46,8 @@
 		</authentication-provider>
 	</authentication-manager>
 	
-	<!-- In memory user repository -->
-	<!-- <authentication-manager>
+	&lt;!&ndash; In memory user repository &ndash;&gt;
+	&lt;!&ndash; <authentication-manager>
 		<authentication-provider>
 			<user-service>
 				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
@@ -54,6 +55,6 @@
 				<user name="student" password="student" authorities="ROLE_STUDENT" />
 			</user-service>
 		</authentication-provider>
-	</authentication-manager> -->
+	</authentication-manager> &ndash;&gt;
 	
-</beans:beans>
+</beans:beans>-->

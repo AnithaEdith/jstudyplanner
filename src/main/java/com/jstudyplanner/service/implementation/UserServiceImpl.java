@@ -2,6 +2,7 @@ package com.jstudyplanner.service.implementation;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,11 @@ import com.jstudyplanner.service.UserService;
 public class UserServiceImpl implements UserService {
 	
 	@Autowired UserDAO userDAO;
-	
+
+	/*@Autowired
+	private SessionFactory sessionFactory;*/
+
+
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
 		return null;

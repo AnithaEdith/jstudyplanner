@@ -2,6 +2,7 @@ package com.jstudyplanner.service.implementation;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,13 @@ import com.jstudyplanner.service.CampusService;
 public class CampusServiceImpl implements CampusService {
 	
 	@Autowired CampusDAO campusDAO;
-	
+
+/*
+	@Autowired
+	private SessionFactory sessionFactory;
+*/
+
+
 	public List<Campus> getAllCampuses() {
 		return campusDAO.getAllCampuses();
 	}

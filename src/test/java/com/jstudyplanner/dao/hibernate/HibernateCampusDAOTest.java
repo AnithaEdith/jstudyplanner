@@ -5,8 +5,15 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -15,16 +22,24 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.jstudyplanner.dao.CampusDAO;
 import com.jstudyplanner.domain.Campus;
 
+@RunWith(MockitoJUnitRunner.class)
 public class HibernateCampusDAOTest {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HibernateCampusDAOTest.class);
 	private static CampusDAO campusDAO;
 	private static ApplicationContext beansCtx;
-	
+
+/*
+	@Mock
+	private static SessionFactory sessionFactory;
+*/
+
 	@BeforeClass
 	public static void setUp() {
+	//	MockitoAnnotations.initMocks(this);
 		beansCtx = new ClassPathXmlApplicationContext("test-context.xml");
 		campusDAO = (CampusDAO) beansCtx.getBean("campusDAO");
+
 	}
 	
 	@Test
@@ -45,6 +60,7 @@ public class HibernateCampusDAOTest {
 	 */
 	@Test
 	public void testAddGetDeleteCampus() {
+	//	when(campusDAO.).thenReturn(sessionFactory);
 		Campus ipswich = (Campus) beansCtx.getBean("ipswich");
 		try {
 			campusDAO.add(ipswich);

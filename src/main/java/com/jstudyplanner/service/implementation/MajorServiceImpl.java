@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,13 @@ public class MajorServiceImpl implements MajorService {
 	
 	@Autowired MajorDAO majorDAO;
 	@Autowired CourseDAO courseDAO;
-	
+
+/*
+	@Autowired
+	private SessionFactory sessionFactory;
+*/
+
+
 	public List<Major> getAllMajors() {
 		return majorDAO.getAllMajors();
 	}

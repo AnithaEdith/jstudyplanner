@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +23,14 @@ import com.jstudyplanner.domain.User;
  * @author oleg
  */
 @Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+@Repository
 public class HibernateUserDAO implements UserDAO {
 	
 	// injection should be defined in the hibernate-context.xml
+//	@Autowired
 	private SessionFactory sessionFactory;
-	
+
+	@Autowired
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -40,6 +45,7 @@ public class HibernateUserDAO implements UserDAO {
 		if (user.getEnabled() == null) {
 			user.setEnabled((byte) 0);
 		}
+	//	this.sessionFactory.getCurrentSession().persist(user);
 		this.sessionFactory.getCurrentSession().persist(user);
 	}
 
@@ -52,7 +58,9 @@ public class HibernateUserDAO implements UserDAO {
 		if (user.getEnabled() == null) {
 			user.setEnabled((byte) 0);
 		}
+//		this.sessionFactory.getCurrentSession().update(user);
 		this.sessionFactory.getCurrentSession().update(user);
+
 	}
 
 	
@@ -61,14 +69,18 @@ public class HibernateUserDAO implements UserDAO {
 	 */
 	@Transactional(readOnly=false)
 	public void delete(User user) {
+
+	//	this.sessionFactory.getCurrentSession().delete(user);
 		this.sessionFactory.getCurrentSession().delete(user);
+
 	}
 	
-	
+
 	@Transactional(readOnly=false)
 	public void delete(String username) {
 		User user = getUserByUsername(username);
 		if (user != null) {
+	//		this.sessionFactory.getCurrentSession().delete(user);
 			this.sessionFactory.getCurrentSession().delete(user);
 		}
 		// TODO else if not found (throw exception)

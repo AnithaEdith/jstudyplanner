@@ -13,6 +13,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 /**
  * AuthenticationSuccessHandler implementation that is used in Spring Security
@@ -22,6 +23,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  * The URL is defined based on users authority (granted role), e.g. ROLE_ADMIN
  * should redirect to /admin/admin.
  */
+@Component
 public class SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

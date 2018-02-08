@@ -2,6 +2,7 @@ package com.jstudyplanner.service.implementation;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,10 @@ import com.jstudyplanner.service.CAService;
 
 @Component("caService")
 public class CAServiceImpl implements CAService {
+
+	/*@Autowired
+	private SessionFactory sessionFactory;
+*/
 
 	@Autowired CourseAvailabilityDAO caDAO;
 	@Autowired CourseDAO courseDAO;

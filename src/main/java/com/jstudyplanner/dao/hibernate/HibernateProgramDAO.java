@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,16 +24,22 @@ import com.jstudyplanner.domain.Program;
  * @author oleg
  */
 @Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+@Repository
 public class HibernateProgramDAO implements ProgramDAO {
 
+	Logger logger=LoggerFactory.getLogger(this.getClass());
 	// injection should be defined in the hibernate-context.xml
+	//@Autowired
 	private SessionFactory sessionFactory;
-	
+
+
+	@Autowired
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	
+
 	
 	@Transactional(readOnly=false)
 	public void add(Program program) {
@@ -107,7 +117,9 @@ public class HibernateProgramDAO implements ProgramDAO {
 	
 	public List<Program> getAllPrograms() {
 		String hql = "FROM Program p ORDER BY p.code";
+		logger.info("hql query from getAllPrograms" , hql);
 		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		logger.info("is null?");
 		return query.list();
 	}
 

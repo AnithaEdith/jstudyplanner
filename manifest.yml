@@ -4,6 +4,6 @@ disk: 1G
 instances: 1
 applications:
 - name: jstudy-app
-  path: target/jStudyPlanner-1.0.0-BUILD-SNAPSHOT.war
+  path: target/jstudy.war
   services:
   - jstudy-mysql

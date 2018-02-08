@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,10 @@ import com.jstudyplanner.service.CourseService;
 public class CourseServiceImpl implements CourseService {
 	
 	@Autowired CourseDAO courseDAO;
+
+/*	@Autowired
+	private SessionFactory sessionFactory;*/
+
 
 	public List<Course> getAllCourses() {
 		return courseDAO.getAllCourses();

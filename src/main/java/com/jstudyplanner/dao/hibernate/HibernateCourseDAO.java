@@ -4,6 +4,11 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +24,20 @@ import com.jstudyplanner.domain.Course;
  * @author oleg
  */
 @Transactional(propagation=Propagation.REQUIRED, readOnly=true)
+@Repository
 public class HibernateCourseDAO implements CourseDAO {
 	
 	// injection should be defined in the hibernate-context.xml
+	//@Autowired
 	private SessionFactory sessionFactory;
-	
+	Logger logger= LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
 
 	@Transactional(readOnly=false)
 	public void add(Course course) {
@@ -100,8 +110,11 @@ public class HibernateCourseDAO implements CourseDAO {
 
 	
 	public List<Course> getAllCourses() {
-		String hql = "FROM Course c ORDER BY c.title";
-		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		logger.info("inside getAllCourses");
+		String hql1 = "FROM Course c ORDER BY c.title";
+		logger.info("hql1 is " + hql1);
+		logger.info(hql1);
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql1);
 		return query.list();
 	}
 
