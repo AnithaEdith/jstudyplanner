@@ -34,7 +34,7 @@ public class HibernateEnrollmentDAO implements EnrollmentDAO {
 	@Autowired
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public void setSessionFactory(SessionFactory sessionFactory) {
-		sessionFactory = sessionFactory;
+		this.sessionFactory = sessionFactory;
 	}
 
 

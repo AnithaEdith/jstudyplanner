@@ -7,3 +7,4 @@ applications:
   path: target/jstudy.war
   services:
   - jstudy-mysql
+  - jstudy-config

@@ -21,10 +21,6 @@ public class ProgramServiceImpl implements ProgramService {
 	@Autowired ProgramDAO programDAO;
 	@Autowired CourseDAO courseDAO;
 
-/*	@Autowired
-	private SessionFactory sessionFactory;*/
-
-
 	public List<Program> getAllPrograms() {
 		return programDAO.getAllPrograms();
 	}

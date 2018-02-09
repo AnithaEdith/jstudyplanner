@@ -20,12 +20,6 @@ public class CampusServiceImpl implements CampusService {
 	
 	@Autowired CampusDAO campusDAO;
 
-/*
-	@Autowired
-	private SessionFactory sessionFactory;
-*/
-
-
 	public List<Campus> getAllCampuses() {
 		return campusDAO.getAllCampuses();
 	}

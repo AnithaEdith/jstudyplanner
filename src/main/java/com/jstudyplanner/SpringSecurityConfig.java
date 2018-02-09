@@ -5,6 +5,7 @@ import com.jstudyplanner.web.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,6 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -24,7 +26,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/login")).and().authorizeRequests()
+       /* http.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/login")).and().authorizeRequests()
                 .antMatchers("/admin/adminlist").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN")
                 .antMatchers("/staff/**").hasRole("STAFF")
@@ -32,11 +34,32 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/**").permitAll()
                 .and().formLogin().successHandler(successHandler).failureUrl("/loginPage?error").loginProcessingUrl("/login").
-                loginPage("/login").usernameParameter("username").passwordParameter("password").and().logout().permitAll();
+                loginPage("/login").usernameParameter("username").passwordParameter("password").and().logout().permitAll();*/
+
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/admin/adminlist").hasRole("SUPERADMIN")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN", "SUPERADMIN")
+                .antMatchers("/staff/**").hasRole("STAFF")
+                .antMatchers("/student/**").hasRole("STUDENT")
+                .antMatchers("/login").permitAll()
+                .antMatchers("/**").permitAll()
+                .and()
+                .formLogin()
+                    .loginProcessingUrl("/login")
+                    .loginPage("/loginPage")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .failureUrl("/loginPage?error")
+                    .successHandler(successHandler)
+                .and()
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/logoutPage")
+                    .permitAll();
     }
 
     @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(
@@ -51,11 +74,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                                 "\t\t\t\t\tFROM user WHERE username=?");
     }
 
-    @Autowired
+  /*  @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
         auth.inMemoryAuthentication().withUser("staff").password("staff").roles("STAFF");
         auth.inMemoryAuthentication().withUser("student").password("student").roles("STUDENT");
-    }
+    }*/
 
 }

@@ -15,12 +15,6 @@ public class TermServiceImpl implements TermService {
 	
 	@Autowired TermDAO termDAO;
 
-/*
-	@Autowired
-	private SessionFactory sessionFactory;
-
-*/
-
 	public List<Term> getAllTerms() {
 		return termDAO.getAllTerms();
 	}

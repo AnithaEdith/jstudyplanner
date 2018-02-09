@@ -19,10 +19,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired UserDAO userDAO;
 
-	/*@Autowired
-	private SessionFactory sessionFactory;*/
-
-
 	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
 		return null;
@@ -52,16 +48,14 @@ public class UserServiceImpl implements UserService {
 	public List<Staff> getAllStaff() {
 		return userDAO.getUsersByType("staff");
 	}
-	
-	
+
 	/**
 	 * Use userDAO's method to get list of Student users
 	 */
 	public List<Student> getAllStudents() {
 		return userDAO.getUsersByType("student");
 	}
-	
-	
+
 	/**
 	 * Attempts to save/update user.
 	 * Check if username and email are unique. If not throw exception. Else save/update this user.

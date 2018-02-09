@@ -20,12 +20,6 @@ public class MajorServiceImpl implements MajorService {
 	@Autowired MajorDAO majorDAO;
 	@Autowired CourseDAO courseDAO;
 
-/*
-	@Autowired
-	private SessionFactory sessionFactory;
-*/
-
-
 	public List<Major> getAllMajors() {
 		return majorDAO.getAllMajors();
 	}

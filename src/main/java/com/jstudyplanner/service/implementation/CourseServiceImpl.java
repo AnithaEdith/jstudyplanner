@@ -17,10 +17,6 @@ public class CourseServiceImpl implements CourseService {
 	
 	@Autowired CourseDAO courseDAO;
 
-/*	@Autowired
-	private SessionFactory sessionFactory;*/
-
-
 	public List<Course> getAllCourses() {
 		return courseDAO.getAllCourses();
 	}

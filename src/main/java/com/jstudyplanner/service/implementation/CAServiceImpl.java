@@ -19,10 +19,6 @@ import com.jstudyplanner.service.CAService;
 @Component("caService")
 public class CAServiceImpl implements CAService {
 
-	/*@Autowired
-	private SessionFactory sessionFactory;
-*/
-
 	@Autowired CourseAvailabilityDAO caDAO;
 	@Autowired CourseDAO courseDAO;
 	@Autowired CampusDAO campusDAO;
@@ -32,32 +28,27 @@ public class CAServiceImpl implements CAService {
 		return caDAO.getAllCAs();
 	}
 
-	
 	public List<CourseAvailability> getCAByStatus(boolean enabled) {
 		return caDAO.getCAsByStatus(enabled);
 	}
 
 	// TODO develop methods: getCAByCampus, getCAByTerm, getCAByCourse with enabled criteria
-	
-	
+
 	public List<CourseAvailability> getCAByCampus(Campus campus) {
 		// TODO throw exception if not found or unsuccessful. CustomServiceException
 		return caDAO.getCAByCampus(campus);
 	}
 
-	
 	public List<CourseAvailability> getCAByTerm(Term term) {
 		// TODO throw exception if not found or unsuccessful. CustomServiceException
 		return caDAO.getCAByTerm(term);
 	}
 
-	
 	public List<CourseAvailability> getCAByCourse(Course course) {
 		// TODO throw exception if not found or unsuccessful. CustomServiceException
 		return caDAO.getCAByCourse(course);
 	}
 
-	
 	/**
 	 * Attempts to save/update CourseAvailability.
 	 * Check if combination of campus, term and course is unique. If not throw exception.
@@ -81,25 +72,21 @@ public class CAServiceImpl implements CAService {
 		}
 	}
 
-	
 	public void delete(CourseAvailability ca) {
 		// TODO throw exception if not found or unsuccessful. CustomServiceException
 		// TODO check all business constraints for ca delete (e.g. enrollments)
 		caDAO.delete(ca);
 	}
 
-	
 	public CourseAvailability getCAById(Long id) {
 		// TODO throw exception if not found or unsuccessful. CustomServiceException
 		return caDAO.getCAById(id);
 	}
 
-	
 	public CourseAvailability getCAByCampusTermAndCourse(Campus campus,	Term term, Course course) {
 		// TODO throw exception if not found or unsuccessful. CustomServiceException
 		return caDAO.getCAByTermCourseCampus(term, course, campus);
 	}
-
 
 	public List<CourseAvailability> getCAByCampusAndTerm(Campus campus, Term term) {
 		// TODO throw exception if not found or unsuccessful. CustomServiceException
@@ -109,7 +96,6 @@ public class CAServiceImpl implements CAService {
 				+ ", " + campus.getTitle() + ".");
 		} else return caList;
 	}
-
 
 	/**
 	 * Get list of courses that can be used to create multiple CourseAvailability entities
@@ -134,7 +120,6 @@ public class CAServiceImpl implements CAService {
 		
 		return result;
 	}
-
 
 	/**
 	 * Create multiple CourseAvailability objects by given Campus, Term, and 

@@ -2,6 +2,7 @@ package com.jstudyplanner;
 
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +22,14 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class DatabaseConfig {
 
-    @Value("${db.driver}")
+    /*@Value("${db.driver}")
     private String DB_DRIVER;
 
     @Value("${db.url}")
     private String DB_URL;
 
     @Value("${db.username}")
-    private String DB_USERNAME;
+    private String DB_USERNAME;*/
 
     @Value("${hibernate.dialect}")
     private String HIBERNATE_DIALECT;
@@ -39,14 +40,17 @@ public class DatabaseConfig {
     @Value("${hibernate.hbm2ddl.auto}")
     private String HIBERNATE_HBM2DDL_AUTO;
 
-            @Bean
+    @Autowired
+    private DataSource dataSource;
+
+            /*@Bean
             public DataSource dataSource() {
             DriverManagerDataSource dataSource = new DriverManagerDataSource();
             dataSource.setDriverClassName(DB_DRIVER);
             dataSource.setUrl(DB_URL);
             dataSource.setUsername(DB_USERNAME);
             return dataSource;
-            }
+            }*/
 
 
             @Bean
@@ -55,7 +59,7 @@ public class DatabaseConfig {
 
 
                 LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-            sessionFactoryBean.setDataSource(dataSource());
+            sessionFactoryBean.setDataSource(dataSource);
 
             sessionFactoryBean.setMappingResources("mapping.hbm.xml");
 

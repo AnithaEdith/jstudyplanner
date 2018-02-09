@@ -160,11 +160,7 @@ public class AdminController {
 		resultList.setPage(page);
 		return new ModelAndView("admin/campuslist", "resultList", resultList);
 	} // listCampuses
-	
-	
-	
-	
-	
+
 	// Edit / Create methods ----------------------------------------
 	
 	/**

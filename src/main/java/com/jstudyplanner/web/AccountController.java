@@ -14,15 +14,10 @@ public class AccountController {
         return "logoutPage";
     }
      
-    //@RequestMapping(value = "/login", method = RequestMethod.POST)
-    /*public String login() {
-    	System.out.println("performing AccountController.login()");
-        return "/home";
-    }*/
+
     
     @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
     public String loginPage() {
-//    	System.out.println("performing AccountController.loginPage()");
         return "loginPage";
     }
 	
