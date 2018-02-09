@@ -15,7 +15,13 @@ hibernate:
     auto: update
   show_sql: true
 
+management:
+  security:
+    enabled: false
 
+endpoints:
+  shutdown:
+    enabled: true
 
 
 
