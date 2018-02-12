@@ -15,7 +15,7 @@ import com.jstudyplanner.service.CampusService;
  * 
  * @author oleg, oleglukin@yahoo.com
  */
-//@Component("campusService")
+@Component("campusService")
 public class CampusServiceImpl implements CampusService {
 	
 	@Autowired CampusDAO campusDAO;

@@ -1,9 +1,9 @@
 ---
-memory: 1G
-disk: 1G
-instances: 1
 applications:
 - name: jstudy-app
+  memory: 1G
+  disk: 1G
+  instances: 1
   path: target/jstudy.war
   services:
   - jstudy-mysql

@@ -5,4 +5,4 @@ spring:
     config:
       server:
         git:
-          uri: file://Users/anitha/Desktop/workspace/app-config
+          uri: file:///F:/Official/cognizant/pivotal/workspace/app-config

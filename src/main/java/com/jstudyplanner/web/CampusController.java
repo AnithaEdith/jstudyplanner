@@ -37,7 +37,6 @@ public class CampusController {
 	private final static int DEFAULT_PAGE_SIZE = 10;
 	private EurekaClient discoveryClient;
 
-
 	private String campusServiceUrl;
 
 	@Value("${campus.url}")
@@ -50,7 +49,7 @@ public class CampusController {
     private String campus_getbycode;
 
     @Autowired
-    CampusServiceClient campusService;
+    CampusServiceClient campusServiceclient;
 
 	/**
 	 * CampusService implementation should be marked with @Component
@@ -95,7 +94,7 @@ public class CampusController {
             String uri="http://campus-service/"+campus_getall;
             logger.info(uri);
 
-            ResponseEntity<List<Campus>> rateResponse =campusService.getCampusList(uri);
+            ResponseEntity<List<Campus>> rateResponse =campusServiceclient.getCampusList(uri);
 
 
 			List<Campus> campuses = rateResponse.getBody();
@@ -136,12 +135,12 @@ public class CampusController {
 	 * @param model
 	 * @return details view
 	 */
-	/*@RequestMapping(value = "/campuses/{code:.+}", method = RequestMethod.GET)
+	@RequestMapping(value = "/campuses/{code:.+}", method = RequestMethod.GET)
 	public String getCampusDetails(@PathVariable("code") String code, Model model) {
-        String uri="http://campus-service/"+campus_getall;
+        String uri="http://campus-service/"+campus_getbycode+ code;
         logger.info(uri);
 
-        model.addAttribute("campus", campusService.getCampusByCode(uri, code));
+        model.addAttribute("campus", campusServiceclient.getCampusByCode(uri, code));
 		return "campuses/details";
-	}*/
+	}
 }
