@@ -5,4 +5,4 @@ spring:
     config:
       server:
         git:
-          uri: file://Users/anithaedith/Desktop/workspace/app-config
+          uri: file://Users/anitha/Desktop/workspace/app-config

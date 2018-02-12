@@ -8,3 +8,5 @@ applications:
   services:
   - jstudy-mysql
   - jstudy-config
+  - service-registry
+  - circuit-breaker-dashboard
