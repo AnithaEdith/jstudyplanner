@@ -140,7 +140,11 @@ public class CampusController {
         String uri="http://campus-service/"+campus_getbycode+ code;
         logger.info(uri);
 
-        model.addAttribute("campus", campusServiceclient.getCampusByCode(uri, code));
+        ResponseEntity<Campus> campusByCode = campusServiceclient.getCampusByCode(uri, code);
+        Campus campus=campusByCode.getBody();
+        logger.info(campus.getCode() + campus.getTitle());
+
+        model.addAttribute("campus", campus);
 		return "campuses/details";
 	}
 }

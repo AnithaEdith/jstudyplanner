@@ -52,9 +52,9 @@ public class CampusServiceClient {
                     .fromUriString(uri)
                     .queryParam("code", code);
 
+            ResponseEntity<Campus> rateResponse =restTemplate.exchange(uri.toString(), HttpMethod.GET,  null, new ParameterizedTypeReference<Campus>() {});
 
-            Campus rateResponse =restTemplate.getForObject(uri.toString(),   Campus.class);
-            return ResponseEntity.ok(rateResponse);
+            return (rateResponse);
 
         }
 
